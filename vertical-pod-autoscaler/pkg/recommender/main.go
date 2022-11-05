@@ -37,6 +37,8 @@ var (
 	metricsFetcherInterval = flag.Duration("recommender-interval", 1*time.Minute, `How often metrics should be fetched`)
 	checkpointsGCInterval  = flag.Duration("checkpoints-gc-interval", 10*time.Minute, `How often orphaned checkpoints should be garbage collected`)
 	prometheusAddress      = flag.String("prometheus-address", "", `Where to reach for Prometheus metrics`)
+	extraPodSelectorLabel  = flag.String("extra-pod-selector-label", "", `Extra podSelector label`)
+	extraPodSelectorValue  = flag.String("extra-pod-selector-value", "", `Extra podSelector value`)
 	prometheusJobName      = flag.String("prometheus-cadvisor-job-name", "kubernetes-cadvisor", `Name of the prometheus job name which scrapes the cAdvisor metrics`)
 	address                = flag.String("address", ":8942", "The address to expose Prometheus metrics.")
 	kubeApiQps             = flag.Float64("kube-api-qps", 5.0, `QPS limit when making requests to Kubernetes apiserver`)
@@ -99,6 +101,8 @@ func main() {
 			PodLabelsMetricName:    *podLabelsMetricName,
 			PodNamespaceLabel:      *podNamespaceLabel,
 			PodNameLabel:           *podNameLabel,
+			ExtraPodSelectorLabel:  *extraPodSelectorLabel,
+			ExtraPodSelectorValue:  *extraPodSelectorValue,
 			CtrNamespaceLabel:      *ctrNamespaceLabel,
 			CtrPodNameLabel:        *ctrPodNameLabel,
 			CtrNameLabel:           *ctrNameLabel,
